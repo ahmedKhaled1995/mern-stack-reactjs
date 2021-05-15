@@ -1,24 +1,45 @@
-import logo from './logo.svg';
+import { useState } from "react";
+import { Container } from 'react-bootstrap';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+
+import Navigation from "./components/Nav/Navigation";
+import Guard from "./components/Guard/Guard";
+import Home from "./components/Home/Home";
+import Logout from "./components/Auth/Logout";
+import Books from "./components/Books/Books";
+
 import './App.css';
 
 function App() {
+
+  const [token, setToken] = useState('');
+
+  const handleAuth = (token) => {
+    console.log("Logged in");
+    setToken(token);
+  };
+
+  const handleLogout = () => {
+    console.log("Logged out");
+    setToken("");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navigation token={token} />
+        <Container>
+          <Switch>
+            <Route path="/" render={(props) => <Home handleAuth={handleAuth} {...props} />} exact />
+            <Guard>
+              <Route path="/books" component={Books} />
+              <Route path="/logout" render={(props) => <Logout handleLogout={handleLogout} {...props} />} />
+            </Guard>
+          </Switch>
+        </Container>
+      </div>
+    </Router>
   );
 }
 
