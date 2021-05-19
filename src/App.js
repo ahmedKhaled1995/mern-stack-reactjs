@@ -14,7 +14,7 @@ import AdminMain from "./components/Admin/AdminMain";
 
 function App() {
 
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const handleAuth = (token) => {
     console.log("Logged in");
