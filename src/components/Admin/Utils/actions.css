@@ -1,0 +1,8 @@
+.actionItem{
+    cursor: pointer;
+    margin: 12px;
+}
+
+.actionItem:hover {
+    color: #5bc0de;
+  }
