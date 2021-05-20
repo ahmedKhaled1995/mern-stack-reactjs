@@ -8,6 +8,7 @@ import Guard from "./components/Guard/Guard";
 import Home from "./components/Home/Home";
 import Logout from "./components/Auth/Logout";
 import Books from "./components/Books/Books";
+import Mybooks from "./components/Mybooks/Mybooks";
 
 import './App.css';
 
@@ -29,15 +30,16 @@ function App() {
     <Router>
       <div className="App">
         <Navigation token={token} />
-        <Container>
+        <div className="container-fluid">
           <Switch>
             <Route path="/" render={(props) => <Home handleAuth={handleAuth} {...props} />} exact />
             <Guard>
+              <Route path="/mybooks" component={Mybooks} />
               <Route path="/books" component={Books} />
               <Route path="/logout" render={(props) => <Logout handleLogout={handleLogout} {...props} />} />
             </Guard>
           </Switch>
-        </Container>
+        </div>
       </div>
     </Router>
   );
