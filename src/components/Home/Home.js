@@ -13,15 +13,17 @@ const Home = (props) => {
         e.preventDefault();
         setLoginChosen(!loginChoosen);
     };
+    const auth = (loginChoosen ?
+        <Login handelAuthToggle={handelAuthToggle} handleAuth={props.handleAuth}></Login> :
+        <Signup handelAuthToggle={handelAuthToggle} handleAuth={props.handleAuth}></Signup>
+    );
 
     return (
         <Container>
             <Row>
                 <Col sm={8}>Content</Col>
                 <Col sm={4}>
-                    {loginChoosen ?
-                        <Login handelAuthToggle={handelAuthToggle} handleAuth={props.handleAuth}></Login> :
-                        <Signup handelAuthToggle={handelAuthToggle} handleAuth={props.handleAuth}></Signup>}
+                    {localStorage.getItem("token") ? "" : auth}
                 </Col>
             </Row>
         </Container>

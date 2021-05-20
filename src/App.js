@@ -11,10 +11,11 @@ import Books from "./components/Books/Books";
 import Mybooks from "./components/Mybooks/Mybooks";
 
 import './App.css';
+import AdminMain from "./components/Admin/AdminMain";
 
 function App() {
 
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const handleAuth = (token) => {
     console.log("Logged in");
@@ -33,10 +34,12 @@ function App() {
         <div className="container-fluid">
           <Switch>
             <Route path="/" render={(props) => <Home handleAuth={handleAuth} {...props} />} exact />
+            <Route path="/admin" component={AdminMain} />
             <Guard>
               <Route path="/mybooks" component={Mybooks} />
               <Route path="/books" component={Books} />
               <Route path="/logout" render={(props) => <Logout handleLogout={handleLogout} {...props} />} />
+
             </Guard>
           </Switch>
         </div>
