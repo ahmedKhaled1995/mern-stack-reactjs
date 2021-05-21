@@ -86,9 +86,9 @@ const Books = () => {
                 { bookName, category, author },
                 { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
             );
-            const dataObj = data.data.author;
+            const dataObj = data.data.book;
             _id = dataObj._id;
-            // console.log(dataObj);
+            console.log(dataObj);
             setBooks([...books, dataObj]);
         }
         // Then we upload image if provided
@@ -121,7 +121,7 @@ const Books = () => {
                     bookName={itemToEdit.bookName}
                     categoryName={itemToEdit.category.name}
                     categoryId={itemToEdit.category._id}
-                    authorName={itemToEdit.author.firstName + ", " + itemToEdit.author.lastName}
+                    authorName={itemToEdit.author ? itemToEdit.author.firstName + ", " + itemToEdit.author.lastName : null}
                     authorId={itemToEdit.author._id}
                     handleSubmit={handleSubmit} />
             </CustomModal>
@@ -146,7 +146,7 @@ const Books = () => {
                                 <td>{item.category.name}</td>
                                 <td>{item.author.firstName + ", " + item.author.lastName}</td>
                                 <td><img
-                                    src={item.avatar ? `http://localhost:5000/books/${item._id}/avatar` : placeHolderImage}
+                                    src={item.avatar ? `http://localhost:5000/books/${item._id}/avatar?${Math.random()}` : placeHolderImage}
                                     alt="No Image"
                                     width="50"
                                     height="50" />

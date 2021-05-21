@@ -144,7 +144,7 @@ const Authors = () => {
                                 <td>{item.lastName}</td>
                                 <td>{formatDate(item.dateOfBirth)}</td>
                                 <td><img
-                                    src={item.avatar ? `http://localhost:5000/authors/${item._id}/avatar` : placeHolderImage}
+                                    src={item.avatar ? `http://localhost:5000/authors/${item._id}/avatar?${Math.random()}` : placeHolderImage}
                                     alt="No Image"
                                     width="50"
                                     height="50" />
