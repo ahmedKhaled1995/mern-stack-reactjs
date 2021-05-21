@@ -12,6 +12,7 @@ import Mybooks from "./components/Mybooks/Mybooks";
 
 import './App.css';
 import AdminMain from "./components/Admin/AdminMain";
+import Categories from "./components/Categories/Categories";
 
 function App() {
 
@@ -38,8 +39,9 @@ function App() {
             <Guard>
               <Route path="/mybooks" component={Mybooks} />
               <Route path="/books" component={Books} />
+              <Route path="/categories" component={Categories} />
               <Route path="/logout" render={(props) => <Logout handleLogout={handleLogout} {...props} />} />
-
+           
             </Guard>
           </Switch>
         </div>
