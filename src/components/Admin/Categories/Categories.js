@@ -17,7 +17,7 @@ const Categories = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await loadData("http://localhost:5000/categories");
+            const data = await loadData("http://localhost:5000/categories?${Math.random()}");
             console.log(data);
             if (data.error) {
                 setError(true);

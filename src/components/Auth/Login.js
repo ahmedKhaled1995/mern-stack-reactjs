@@ -20,6 +20,7 @@ const Login = (props) => {
         const userData = data.data;
         console.log(userData.token);
         localStorage.setItem("token", userData.token);
+        localStorage.setItem("_id", userData.user._id);
         localStorage.setItem("firstName", userData.user.firstName);
         localStorage.setItem("lastName", userData.user.lastName);
         localStorage.setItem("isAdmin", userData.user.isAdmin);
