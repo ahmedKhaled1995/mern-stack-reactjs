@@ -2,9 +2,12 @@ import axios from "axios";
 import {  Row, Col, Table } from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import '../../style/mybooks.css'
+import Paginations from '../Paginations/Paginations'
 
 const Mybooks = () => {
     const [usrBooks, setUsrBooks] = useState([]);
+    const [pageCount, setPagecount] = useState(0);
+    let limit =1
     const Auth_token = localStorage.getItem("token");
     const config = {
         headers: { Authorization: `Bearer ${Auth_token}` },
@@ -19,8 +22,8 @@ const Mybooks = () => {
         configParams,
         )
         .then(function (response) {
-        console.log(response.data);
         setUsrBooks(response.data)
+        setPagecount(Math.ceil(response.data.length / limit))
         })
         .catch(err => {
             console.log(err);
@@ -33,24 +36,25 @@ const Mybooks = () => {
 
       const handleBookState = (stateType) => {
         const header = document.querySelector("#tableHeader");
-          if (stateType == "all"){
+          if (stateType === "all"){
             config.params.shelveStatus="";
             header.innerHTML = "All Books"
           }
-          if (stateType == "read"){
+          if (stateType === "read"){
             config.params.shelveStatus="Read";
             header.innerHTML = "Finished Books"
           }
-          if (stateType == "currently_reading"){
+          if (stateType === "currently_reading"){
             config.params.shelveStatus="Currently_Reading";
             header.innerHTML = "Currently Reading Books"
           }
-          if (stateType == "want_to_read"){
+          if (stateType === "want_to_read"){
             config.params.shelveStatus="Want_To_Read";
             header.innerHTML = "Want To Read Books"
           }
 
-          fetchBooks(config)
+           fetchBooks(config)
+           
       }
       
     return (
@@ -62,11 +66,11 @@ const Mybooks = () => {
                 <a href="#currently_reading" onClick={() => {  handleBookState("currently_reading")}}>Currently Reading</a>
                 <a href="#want_to_read" onClick={() => {  handleBookState("want_to_read")}}>Want To Read</a>
             </Col>
-            <Col sm={10}>
+            <Col sm={10} >
                 <h1 id="tableHeader" className="text-center">
                     All Books
                 </h1>
-                <Table striped bordered hover size="sm" className="text-center">
+                {/* <Table striped bordered hover size="sm" className="text-center">
                 <thead>
                     <tr>
                     <th>Cover</th>
@@ -104,7 +108,12 @@ const Mybooks = () => {
                         } )
                     }
                 </tbody>
-                </Table>
+                </Table> */}
+                <Paginations 
+                    data={usrBooks}
+                    pageLimit={5}
+                    dataLimit={5} 
+                    />
             </Col>
             </Row>
         </div>
