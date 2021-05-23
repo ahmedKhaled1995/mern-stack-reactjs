@@ -13,6 +13,7 @@ import Mybooks from "./components/Mybooks/Mybooks";
 import './App.css';
 import AdminMain from "./components/Admin/AdminMain";
 import Categories from "./components/Categories/Categories";
+import { Categorybooks } from "./components/Categorybooks/Categorybooks";
 
 function App() {
 
@@ -40,6 +41,8 @@ function App() {
               <Route path="/mybooks" component={Mybooks} />
               <Route path="/books" component={Books} />
               <Route path="/categories" component={Categories} />
+              <Route path="/category/:id"  render={(props) => (
+                  <Categorybooks id={props.match.params.id}/>)}  />
               <Route path="/logout" render={(props) => <Logout handleLogout={handleLogout} {...props} />} />
            
             </Guard>
