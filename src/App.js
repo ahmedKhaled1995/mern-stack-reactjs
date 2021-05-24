@@ -14,6 +14,7 @@ import './App.css';
 import AdminMain from "./components/Admin/AdminMain";
 import Categories from "./components/Categories/Categories";
 import { Categorybooks } from "./components/Categorybooks/Categorybooks";
+import PaginationComponent from "./components/PaginationComponent/PaginationComponent";
 
 function App() {
 
@@ -40,6 +41,8 @@ function App() {
             <Guard>
               <Route path="/mybooks" component={Mybooks} />
               <Route path="/books" component={Books} />
+              {/* <Route path="/pagenation" component={PaginationComponent} /> */}
+              <Route path="/pagenation" render={(props) => <PaginationComponent {...props} />}   />
               <Route path="/categories" component={Categories} />
               <Route path="/category/:id"  render={(props) => (
                   <Categorybooks id={props.match.params.id}/>)}  />
